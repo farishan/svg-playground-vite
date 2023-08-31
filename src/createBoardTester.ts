@@ -45,8 +45,14 @@ function createSizeForm(board: Board) {
 }
 
 export function createBoardTester(board: Board) {
+  const root = document.createElement('div')
+  root.style.position = 'absolute'
+  root.style.right = '0'
+  root.style.top = '0'
+
   const sizeForm = createSizeForm(board)
-  document.body.append(sizeForm)
+
+  root.append(sizeForm)
 
   const viewButton = document.createElement('button')
   viewButton.innerHTML = 'switch to view mode'
@@ -61,8 +67,8 @@ export function createBoardTester(board: Board) {
     console.log(board.getModel())
   }
 
-  document.body.append(viewButton)
-  document.body.append(panButton)
+  root.append(viewButton)
+  root.append(panButton)
 
   const rectDef = createSvgElement('rect')
   rectDef.setAttribute('id', 'myRect')
@@ -104,4 +110,6 @@ export function createBoardTester(board: Board) {
   line.setAttribute('y2', rect1.getAttribute('y') || "0")
   line.setAttribute('stroke', 'yellow')
   board.append(line)
+
+  document.body.append(root)
 }
